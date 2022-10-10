@@ -7,7 +7,6 @@
 */
 
 #include <iostream>
-#include <cmath>
 #include <iomanip>
 #include <string>
 #include <fstream>
@@ -15,37 +14,40 @@ using namespace std;
 
 string inputFile = "/Users/samsytsma/Documents/Lab4/Lab4/TempInput.dat";
 //Precondition:     None
-//Postcondition:
-//Note:             s
+//Postcondition:    Output header to screen
 void Header();
-//Precondition:     None
-//Postcondition:
-//Note:             s
+
+//Precondition:     Include libraries fstrem, string, iomanip, and iostream. Pos and Neg must be called
+//Postcondition:    Gets called to main
 float FileInput();
+
 //Precondition:     File Input must be called
 //Postcondition:    s
-//Note:             s
 float StarCalc();
+
 //Precondition:     File Input must be called
 //Postcondition:    s
-//Note:             s
 float StarCalcNeg();
-//Precondition:     File Input must be called
-//Postcondition:    s
-//Note:             s
+
+//Precondition:     Include library iostream, iomanip. FileInput, Pos, and StarCalc must be called. Have values stored in temp.
+//Postcondition:    Sets width at 0 and outputs |.
 float Output();
-//Precondition:     File Input must be called
-//Postcondition:    s
-//Note:             s
+
+//Precondition:     Include library iostream, iomanip. FileInput, Neg, and StarCalcNeg must be called. Have values stored in temp.
+//Postcondition:    Sets width at 0 and outputs |.
 float OutputNeg();
-//Precondition:     File Input must be called
+//Precondition:     Output must be called
 //Postcondition:    s
-//Note:             s
 float StarOutput();
+//Precondition:     OutputNeg must be called
+//Postcondition:    s
+float StarOutputNeg();
 //Precondition:     File Input must be called
 //Postcondition:    s
-//Note:             s
-float StarOutputNeg();
+float Pos();
+//Precondition:     File Input must be called
+//Postcondition:    s
+float Neg();
 int InTemp;
 int temp;
 int star;
@@ -55,7 +57,6 @@ int i;
 int main() {
     Header();
     FileInput();
-    
     
     return 0;
 }
@@ -70,23 +71,12 @@ float FileInput(){
     while (!infile.eof())
     {
         infile >> temp;
-        
-        if (temp >= 0 && temp <= 120)
-        {
-            cout << endl << temp;
-            StarCalc();
-            Output();
-            StarOutput();
-        }
-        if (temp >= -30 && temp <= -1){
-            cout << endl << temp;
-            StarCalcNeg();
-            OutputNeg();
-            StarOutputNeg();
-            cout << "|";
-        }
+        Pos();
+        Neg();
     }
     cout << endl;
+
+    infile.close();
     return 0;
 }
 float StarCalc(){
@@ -138,5 +128,25 @@ float StarOutputNeg(){
     for (int i = 1; i <= star; i++)
         cout << "*";
     
+    return 0;
+}
+float Pos(){
+    if (temp >= 0 && temp <= 120)
+    {
+        cout << endl << temp;
+        StarCalc();
+        Output();
+        StarOutput();
+    }
+    return 0;
+}
+float Neg(){
+    if (temp >= -30 && temp <= -1){
+        cout << endl << temp;
+        StarCalcNeg();
+        OutputNeg();
+        StarOutputNeg();
+        cout << "|";
+    }
     return 0;
 }
